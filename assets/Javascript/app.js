@@ -95,6 +95,10 @@ var movieGenres = [{
 // once we have each genre seperated from the id we will append the genre name to the dropdown
     for(i=0;i>movieGenres.length;i++){
         var genreName=movieGenres[i]
+        var newLIi= $("<li>");
+            newLI.addClass("genre").text(genreName.name);
+            $('.dropdown-menu').append(newLi);
+
 
         
 
