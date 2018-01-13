@@ -95,7 +95,7 @@ var movieGenres = [{
 // once we have each genre seperated from the id we will append the genre name to the dropdown
     for(i=0;i>movieGenres.length;i++){
         var genreName=movieGenres[i]
-        
+
         
 
     }
@@ -104,7 +104,7 @@ var movieGenres = [{
 function displayMovieInfo() {
 
     var genre = $(this).attr("data-name");
-    var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=13fb7053b108732df8330eeb99f8a1f2&page=1&with_genres="+ genre +"&primary_release_date.lte=2016-1-1;
+    var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=13fb7053b108732df8330eeb99f8a1f2&page=1&with_genres="+ genre +"&primary_release_date.lte=2016-1-1";
 
     // Creating an AJAX call for the specific movie button being clicked
     $.ajax({
