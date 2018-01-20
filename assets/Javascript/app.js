@@ -96,7 +96,7 @@ var movieGenres = [{
 // once we have each genre seperated from the id we will append the genre name to the dropdown
     for (i = 0; i < movieGenres.length ; i++) {
         var genreName=movieGenres[i]
-        var newLi= $("<a>");
+        var newLi= $("<button>");
             newLi.addClass("dropdown-item").attr("value", genreName.id).text(genreName.name);
             $('.dropdown-menu').append(newLi);
             console.log(movieGenres[i])
@@ -108,60 +108,76 @@ var movieGenres = [{
     
 
 // function displayMovieInfo() {
+    $('.dropdown-item').on('click', function(event) {
 
-//     var genre = $(this).attr("data-name");
-//     var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=13fb7053b108732df8330eeb99f8a1f2&page=1&with_genres="+ genre +"&primary_release_date.lte=2016-1-1";
+    $("#title").html("");
+    $("#movieP").html("");
+    $("#plot").html("");
+
+
+
+    var genre = $(this).attr("value");
+    console.log("This worked!");
+    var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=13fb7053b108732df8330eeb99f8a1f2&page=1&with_genres="+ genre +"&primary_release_date.lte=2016-1-1";
+    // var queryURL = "https://api.themoviedb.org/3/discover/movie?api_key=13fb7053b108732df8330eeb99f8a1f2&page=1&with_genres=28&primary_release_date.lte=2016-1-1";
+
 
 //     // Creating an AJAX call for the specific movie button being clicked
-//     $.ajax({
-//       url: queryURL,
-//       method: "GET"
-//     }).done(function(response) {
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).done(function(response) {
+        console.log("this is working")
+        console.log(response);
+        // console.log(JSON.stringify(response));
+        console.log(response.results[0].poster_path);;
 
-//       // Creating a div to hold the movie
-//       var movieDiv = $("<div class='movie'>");
 
-//       // Storing the rating data
-//       var rating = response.Rated;
+        var randomMovie = Math.floor(Math.random() * response.results.length);
 
-//       // Creating an element to have the rating displayed
-//       var pOne = $("<p>").text("Rating: " + rating);
+        console.log(randomMovie);
 
-//       // Displaying the rating
-//       movieDiv.append(pOne);
 
-//       // Storing the release year
-//       var released = response.Released;
+        var movieTitle = response.results[randomMovie].original_title;
+        console.log(movieTitle);
 
-//       // Creating an element to hold the release year
-//       var pTwo = $("<p>").text("Released: " + released);
+        var movieI = response.results[randomMovie].poster_path;
+        console.log(movieI);
 
-//       // Displaying the release year
-//       movieDiv.append(pTwo);
+        var imgaeURL = "http://image.tmdb.org/t/p/w185/";
 
-//       // Storing the plot
-//       var plot = response.Plot;
+        var imgURL= imgaeURL + movieI;
 
-//       // Creating an element to hold the plot
-//       var pThree = $("<p>").text("Plot: " + plot);
+        console.log(imgURL);
 
-//       // Appending the plot
-//       movieDiv.append(pThree);
+        var moviePlot = response.results[randomMovie].overview;
+        console.log(moviePlot);
 
-//       // Retrieving the URL for the image
-//       var imgURL = response.Poster;
 
-//       // Creating an element to hold the image
-//       var image = $("<img>").attr("src", imgURL);
+    //   // Creating a div to hold the movie title
+        
+        var title = $("<h1>").text(movieTitle);
 
-//       // Appending the image
-//       movieDiv.append(image);
+        // creating a imge to store the movie photo
 
-//       // Putting the entire movie above the previous movies
-//       $("#movies-view").prepend(movieDiv);
-//     });
+        var image = $("<img>").attr("src", imgURL);
 
-//   }
+        //creating a p to hold the movie plot
+
+        var plot = $("<p>").text(moviePlot);
+
+        // prepending all the movie data to the page
+
+        $("#title").prepend(title);
+
+        $("#movieP").prepend(image);
+
+        $("#plot").prepend(plot);
+
+
+    });
+
+  });
 
 //   // Function for displaying movie data
 //   function renderButtons() {
