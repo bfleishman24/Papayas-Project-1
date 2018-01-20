@@ -21,6 +21,8 @@ http://www.templatemo.com/tm-505-stacked
         <link rel="stylesheet" href="css/mycss.css">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -133,15 +135,27 @@ http://www.templatemo.com/tm-505-stacked
                                   <h4>Pick your tunes</h4>
                                   <p>Lorem ipsum dolor, adipis scing elit etiam ante vehicula, aliquam mauris in, luctus neque.</p>
                                   <!-- DELETING PRIMARY BUTTON | ADDING DROW -->
-                                  <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Dropdown button
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="#">Action</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
+                                  <div class="input-group dropdown" >
+                                      <input id="music-input" type="text" class="form-control" placeholder="tunes" list="tunes-dropdown">
+                                      <datalist id="tunes-dropdown">
+                                      </datalist>
+                                      <div class="input-group-btn" >
+                                          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="label-icon" >Filters</span> <span class="caret" >&nbsp;</span></button>
+                                          <div class="dropdown-menu dropdown-menu-right over-ride-li">
+                                              <ul class="category_filters over-ride-li">
+                                                  <li>
+                                                      <input type="checkbox" name="check" id="vegetarian" value="+vegetarian"><label class="category-label">Vegetarian</label>
+                                                  </li>
+                                                  <li>
+                                                      <input type="checkbox" name="check" id="dairy-free" value="dairy+free" ><label class="category-label">Dairy Free</label>
+                ß                                  </li>
+                                                  <li >
+                                                      <input type="checkbox" name="check" id="gluten-free" value="gluten+free" ><label class="category-label">Gluten Free</label>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                          <button id="music-button" type="button" class="btn btn-secondary btn-search" ><i class="glyphicon glyphicon-search" ></i></button>
+                                      </div>
                                   </div>
                                 </div>
                               </div>
@@ -152,8 +166,27 @@ http://www.templatemo.com/tm-505-stacked
                                 <div class="text-content">
                                   <h4>Pick your meal</h4>
                                   <p>Lorem ipsum dolor, adipis scing elit etiam ante vehicula, aliquam mauris in, luctus neque.</p>
-                                  <div class="primary-button">
-                                    <a href="#">Discover More</a>
+                                  <div class="input-group dropdown" >
+                                      <input id="recipe-input" type="text" class="form-control" placeholder="Cuisine" list="cuisine-dropdown">
+                                      <datalist id="cuisine-dropdown">
+                                      </datalist>
+                                      <div class="input-group-btn" >
+                                          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="label-icon" >Filters</span> <span class="caret" >&nbsp;</span></button>
+                                          <div class="dropdown-menu dropdown-menu-right over-ride-li">
+                                              <ul class="category_filters over-ride-li">
+                                                  <li>
+                                                      <input type="checkbox" name="check" id="vegetarian" value="+vegetarian"><label class="category-label">Vegetarian</label>
+                                                  </li>
+                                                  <li>
+                                                      <input type="checkbox" name="check" id="dairy-free" value="dairy+free" ><label class="category-label">Dairy Free</label>
+                ß                                  </li>
+                                                  <li >
+                                                      <input type="checkbox" name="check" id="gluten-free" value="gluten+free" ><label class="category-label">Gluten Free</label>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                          <button id="recipe-button" type="button" class="btn btn-secondary btn-search" ><i class="glyphicon glyphicon-search" ></i></button>
+                                      </div>
                                   </div>
                                 </div>
                               </div>
@@ -164,8 +197,30 @@ http://www.templatemo.com/tm-505-stacked
                                 <div class="text-content">
                                   <h4>Pick your movie</h4>
                                   <p>Lorem ipsum dolor, adipis scing elit etiam ante vehicula, aliquam mauris in, luctus neque.</p>
-                                  <div class="primary-button">
+                                  <!-- <div class="primary-button">
                                     <a href="#">Discover More</a>
+                                  </div> -->
+                                  <div class="input-group dropdown" >
+                                      <input id="movie-input" type="text" class="form-control" placeholder="movie" list="movie-dropdown">
+                                      <datalist id="movie-dropdown">
+                                      </datalist>
+                                      <div class="input-group-btn" >
+                                          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="label-icon" >Filters</span> <span class="caret" >&nbsp;</span></button>
+                                          <div class="dropdown-menu dropdown-menu-right over-ride-li">
+                                              <ul class="category_filters over-ride-li">
+                                                  <li>
+                                                      <input type="checkbox" name="check" id="vegetarian" value="+vegetarian"><label class="category-label">Vegetarian</label>
+                                                  </li>
+                                                  <li>
+                                                      <input type="checkbox" name="check" id="dairy-free" value="dairy+free" ><label class="category-label">Dairy Free</label>
+                ß                                  </li>
+                                                  <li >
+                                                      <input type="checkbox" name="check" id="gluten-free" value="gluten+free" ><label class="category-label">Gluten Free</label>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                          <button id="movie-button" type="button" class="btn btn-secondary btn-search" ><i class="glyphicon glyphicon-search" ></i></button>
+                                      </div>
                                   </div>
                                 </div>
                               </div>
