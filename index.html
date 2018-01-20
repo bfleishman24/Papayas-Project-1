@@ -44,18 +44,38 @@
                             </div>
                           </div>
                     </div>
-                    <div class="input-group add-on">
-                        <input class="form-control" id="recipe-input" placeholder="Recipe" name="srch-term" type="text">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" id="recipe-button" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    <div class="input-group dropdown" >
+                        <input id="recipe-input" type="text" class="form-control" placeholder="Cuisine" list="cuisine-dropdown">
+                        <datalist id="cuisine-dropdown">
+                        </datalist>
+                        <div class="input-group-btn" >
+                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="label-icon" >Filters</span> <span class="caret" >&nbsp;</span></button>
+                            <div class="dropdown-menu dropdown-menu-right" >
+                                <ul class="category_filters" >
+                                    <li >
+                                        <input type="checkbox" name="check" id="vegetarian" value="+vegetarian"><label class="category-label">Vegetarian</label>
+                                    </li>
+                                    <li >
+                                        <input type="checkbox" name="check" id="dairy-free" value="dairy+free" ><label class="category-label">Dairy Free</label>
+                                    </li>
+                                    <li >
+                                        <input type="checkbox" name="check" id="gluten-free" value="gluten+free" ><label class="category-label">Gluten Free</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button id="recipe-button" type="button" class="btn btn-secondary btn-search" ><i class="glyphicon glyphicon-search" ></i></button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="row generator">
                 <div class="col-md-4 recipe">
+                    <div class="row title"></div>
+                    <div class="row ingredients"></div>
+                    <div class="row instructions"></div>
                     <button type="button" class="btn btn-primary" id="recipe-button">Recipe</button>
                 </div>
+
                 <div class="col-md-4 playlist">
                     <button type="button" class="btn btn-primary" id="playist-button">Playlist</button>
                 </div>
@@ -75,6 +95,7 @@
 
     <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="assets/javascript/app.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
