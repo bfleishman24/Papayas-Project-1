@@ -15,7 +15,7 @@ $('document').ready(function() {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://accounts.spotify.com/api/token",
+        "url": "https://cors-anywhere.herokuapp.com/https://accounts.spotify.com/api/token",
         "method": "POST",
         //"Access-Control-Allow-Origin": "*",
         /*"xhrFields": {
