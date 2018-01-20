@@ -8,6 +8,9 @@
     <title>D8@</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    
+    
 </head>
 
 <body>
@@ -33,10 +36,13 @@
                       </div>
                     </div>
                     <div class="input-group add-on">
-                        <input class="form-control" id="movie-input" placeholder="Movie" name="srch-term" type="text">
-                        <div class="input-group-btn">
-                          <button class="btn btn-default" id="movie-button" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Movie Genre
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            </div>
+                          </div>
                     </div>
                     <div class="input-group dropdown" >
                         <input id="recipe-input" type="text" class="form-control" placeholder="Cuisine" list="cuisine-dropdown">
@@ -78,6 +84,12 @@
                 </div>
             </div>
         </div>
+
+        <div class="row" id="movieContent">
+            <div class="col-lg-4" id="title"></div>
+            <div class="col-lg-4" id="movieP"></div>
+            <div class="col-lg-4" id="plot"></div>
+\        </div>
     </div>
 
 
@@ -85,6 +97,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="assets/javascript/app.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
