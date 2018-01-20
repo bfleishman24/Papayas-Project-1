@@ -17,7 +17,8 @@ $('document').ready(function() {
         "crossDomain": true,
         "url": "https://accounts.spotify.com/api/token",
         "method": "POST",
-        "xhrFields": {
+        //"Access-Control-Allow-Origin": "*",
+        /*"xhrFields": {
             "withCredentials": false
         },
         //"dataType": "jsonp",
@@ -26,10 +27,10 @@ $('document').ready(function() {
         },
         error: function() {
             alert('Failed!');
-        },
+        },*/
         "headers": {
             //"Access-Control-Allow-Credentials": "true",
-            //"Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "*",
             //"Access - Control - Allow - Methods": "GET, POST, OPTIONS",
             //"Access - Control - Allow - Methods": "*",
             //"Access - Control - Allow - Headers": "Content-Type",
