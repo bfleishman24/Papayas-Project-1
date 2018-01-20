@@ -1,3 +1,5 @@
+// need to install https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi
+
 $('document').ready(function() {
     // Initialize Firebase
     var config = {
@@ -11,43 +13,79 @@ $('document').ready(function() {
     firebase.initializeApp(config);
 
     var settings = {
-        async: true,
-        crossDomain: true,
-        url: 'https://api.spotify.com/v1/browse/categories/dinner/playlists?country=US&limit=1&offset=5',
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer BQClqUO3xlnfN23dUxk484_eH7gKoALRABLAfyVD49s5EQ6OPNT3gVbCftPIHiqzY3J3DwFhn7wQay20aZr_oqcMNOTtzfOAcSNpLjtYR6DqyhiYdZKT8QpL_PbGuvLDkJP0lVHnv-YnLG25-eGyUDOFIinKZSmdMA&refresh_token=AQBR0uyMhkMxr-86O-qcDf8Tbislg29r7_c4GX0pccgpp2lkPNaGSWZwO7Zei14vMd0Yr35fEpyzBzJCDZmv4DXnH_rdeaNPGfwscyYuIpjsNlKF9cGAsL9GLTeOvhgQpok' }
-    };
+        "async": true,
+        "crossDomain": true,
+        "url": "https://accounts.spotify.com/api/token",
+        "method": "POST",
+        "xhrFields": {
+            "withCredentials": false
+        },
+        //"dataType": "jsonp",
+        success: function() {
+            alert("Success");
+        },
+        error: function() {
+            alert('Failed!');
+        },
+        "headers": {
+            //"Access-Control-Allow-Credentials": "true",
+            //"Access-Control-Allow-Origin": "*",
+            //"Access - Control - Allow - Methods": "GET, POST, OPTIONS",
+            //"Access - Control - Allow - Methods": "*",
+            //"Access - Control - Allow - Headers": "Content-Type",
+            //"Access - Control - Allow - Headers": "*",
+            //"Access-Control-Max-Age": 86400,
+            "Authorization": "Basic NjIyYTUwNDZkN2ZkNDM2Njk4MGNhZDgyNDJiNTYzY2U6ZjA2YWNhNzUxNGI5NDI1ZDk3MTc3MGIzMDMwNGZkMzE=",
+            "Content-Type": "application/x-www-form-urlencoded",
+            //"Cache-Control": "no-cache",
+            //"Postman-Token": "8671fad7-1cd4-6971-adb1-3c6653afddff"
+        },
+        "data": {
+            "grant_type": "client_credentials"
+        }
+    }
 
     $.ajax(settings).done(function(response) {
-
         console.log(response);
-        console.log(JSON.stringify(response));
-        console.log(response.playlists.items[0].external_urls.spotify);
-        var results = response.playlists.items.external_urls;
+        //console.log(response.access_token);
 
-        //console.log(results);
+        var accessToken = response.access_token;
+        console.log(response.access_token);
 
+        var getPlaylist = {
+            async: true,
+            crossDomain: true,
+            url: 'https://api.spotify.com/v1/browse/categories/dinner/playlists?country=US&limit=1&offset=5',
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + accessToken + "'"
+            }
+        };
 
-        //for (var i = 0; i < results.length; i++) {
-        // Creating a div to hold the Playlists
-        var playlistDiv = $("<iframe>");
-        playlistDiv.attr('src', 'https://open.spotify.com/embed?uri=' + response.playlists.items[0].uri).css({ width: '300', height: '380', frameborder: '0', allowtransparency: 'true' });
+        $.ajax(getPlaylist).done(function(data) {
+            console.log(data);
+            //console.log(JSON.stringify(data));
+            console.log(data.playlists.items[0]);
+            console.log(data.playlists.items[0].external_urls.spotify);
+            console.log(data.playlists.items[0].uri);
 
-        /*var playlistDiv = $("<iframe>");
-        playlistDiv.attr('src', 'https://open.spotify.com/embed?uri=' + response.playlists.items[0].uri + '&view=coverart').css({ width: '300', height: '380', frameborder: '0', allowtransparency: 'true' });*/
-        /*<iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-         */
-        //var resultPlaylist = JSON.stringify(results[i]);
-
-        // Putting the entire Playlist above the previous Playlists
-        //playlistDiv.prepend(response.playlists.items[0].external_urls.spotify);
-        //$('.playlist').prepend(response.playlists.items[0].uri);
-        $('.playlist').prepend(playlistDiv);
-        console.log(playlistDiv);
-        console.log('https://open.spotify.com/embed?uri=' + response.playlists.items[0].uri);
-
-        //}
-
+            var playlistDiv = $('<iframe>');
+            playlistDiv
+                .attr(
+                    'src',
+                    'https://open.spotify.com/embed?uri=' +
+                    data.playlists.items[0].external_urls.spotify
+                )
+                .css({
+                    width: '300',
+                    height: '380',
+                    frameborder: '0',
+                    allowtransparency: 'true',
+                });
+            $('.playlist').prepend(playlistDiv);
+            console.log(playlistDiv);
+            console.log('https://open.spotify.com/embed?uri=' + data.playlists.items[0].uri);
+        });
     });
-
 });
