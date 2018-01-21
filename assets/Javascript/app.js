@@ -3,7 +3,7 @@ $('document').ready(function() {
     'dinner',
     'romance',
     'chill',
-    'hip hop',
+    'hiphop',
     'latin',
     'party',
   ];
