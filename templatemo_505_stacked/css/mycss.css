@@ -15,8 +15,8 @@
 }
 
 .nav-sizer {
-    height: 45px;
-    width: 47px;
+    height: 51px;
+    width: 48px;
 }
 
 .txt-formating {
@@ -44,4 +44,10 @@
 .removebackground  {
     background-color: rgba(0,0,0,0);
 
+}
+
+.img-sizer {
+    height: 165px;
+    width: 210px;
+    margin-top: 25px;
 }
