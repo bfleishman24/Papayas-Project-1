@@ -21,9 +21,11 @@ $('document').ready(function() {
     'dinner',
     'romance',
     'chill',
-    'hiphop',
+    'hip-hop',
     'latin',
     'party',
+    'soul',
+    'mood'
   ];
 
   for (i = 0; i < playlistCategories.length; i++) {
@@ -31,7 +33,7 @@ $('document').ready(function() {
       //console.log(playlistName);
       var newPlaylist = $('<div>');
       newPlaylist
-        .addClass('dropdown-item playlist-dropdown')
+        .addClass('playlist-dropdown topic-dropdown')
         .attr('value', playlistName)
         .html(playlistName);
       $('.playlist-list').append(newPlaylist);
@@ -72,7 +74,7 @@ $('document').ready(function() {
         var getPlaylist = {
           async: true,
           crossDomain: true,
-          url: 'https://api.spotify.com/v1/browse/categories/' + playlistSelected + '/playlists?limit=10',
+          url: 'https://api.spotify.com/v1/browse/categories/' + playlistSelected + '/playlists?limit=50',
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -145,7 +147,7 @@ $('#recipe-button').on('click', function() {
 
     $.ajax({
         method: 'GET',
-        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=' + recipeSearch + '%2Cmain+course%2C+instructions%2Cpreparation+minutes' + filter;
+        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=' + recipeSearch + '%2Cmain+course%2C+instructions%2Cpreparation+minutes' + filter,
         headers: { "X-Mashape-Key": 'n884na5hymmshNJQPRr9e1VpysDQp1p3GaVjsnkHuZgYB165gY', "Accept": 'application/json' },
         success: function(data) {
             console.log(data);
@@ -260,7 +262,7 @@ for (i = 0; i < movieGenres.length; i++) {
   var genreName = movieGenres[i];
   var newLi = $('<div>');
   newLi
-    .addClass('dropdown-item')
+    .addClass('dropdown-item topic-dropdown')
     .attr('value', genreName.id)
     .text(genreName.name);
   $('.genre-list').append(newLi);
@@ -271,7 +273,7 @@ $('.dropdown-item').on('click', function(event) {
   event.preventDefault();
 
   $('#title').html('');
-  $('#movieP').html('');
+  $('.movieP').html('');
   $('#plot').html('');
 
   var genre = $(this).attr('value');
@@ -310,13 +312,14 @@ $('.dropdown-item').on('click', function(event) {
 
     // creating a imge to store the movie photo
     var image = $('<img>').attr('src', imgURL);
+    image.addClass('picture-size');
 
     //creating a p to hold the movie plot
     var plot = $('<p>').text(moviePlot);
 
     // prepending all the movie data to the page
     $('#title').prepend(title);
-    $('#movieP').prepend(image);
+    $('.movieP').prepend(image);
     $('#plot').prepend(plot);
   });
 });
