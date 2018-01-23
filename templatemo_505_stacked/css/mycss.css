@@ -193,6 +193,10 @@ h2 a {
     max-width: 250px;
     height: auto;
 }
+
+.genre-list, .playlist-list:hover {
+    cursor: pointer;
+}
 /* @media (max-width: 800px) {
 .container td:nth-child(4),
 .container th:nth-child(4) { display: none; }
