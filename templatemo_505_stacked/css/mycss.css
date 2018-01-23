@@ -173,6 +173,22 @@ h2 a {
   transition-timing-function: line;
 }
 
+.input-group-btn {
+    text-align: center;
+}
+
+.dropdown-item {
+    text-align: center;
+}
+
+.big-picture {
+    object-fit: cover;
+}
+
+.recipe {
+    color: white !important;
+}
+
 /* @media (max-width: 800px) {
 .container td:nth-child(4),
 .container th:nth-child(4) { display: none; }
