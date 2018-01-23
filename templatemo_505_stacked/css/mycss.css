@@ -177,7 +177,7 @@ h2 a {
     text-align: center;
 }
 
-.dropdown-item {
+.topic-dropdown {
     text-align: center;
 }
 
@@ -189,6 +189,10 @@ h2 a {
     color: white !important;
 }
 
+.picture-size {
+    max-width: 250px;
+    height: auto;
+}
 /* @media (max-width: 800px) {
 .container td:nth-child(4),
 .container th:nth-child(4) { display: none; }
