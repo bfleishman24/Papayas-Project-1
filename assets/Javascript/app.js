@@ -144,7 +144,7 @@ $('#recipe-button').on('click', function() {
 
     $.ajax({
         method: 'GET',
-        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=' + recipeSearch + '%2Cmain+course%2C+instructions%2Cpreparation+minutes' + filter,
+        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=' + recipeSearch + '%2Cmain+course%2C+instructions%2Cpreparation+minutes' + filter;
         headers: { "X-Mashape-Key": 'n884na5hymmshNJQPRr9e1VpysDQp1p3GaVjsnkHuZgYB165gY', "Accept": 'application/json' },
         success: function(data) {
             console.log(data);
@@ -283,6 +283,7 @@ $('.dropdown-item').on('click', function(event) {
     url: queryURL,
     method: 'GET',
   }).done(function(response) {
+
     console.log(response);
     // console.log(JSON.stringify(response));
 
