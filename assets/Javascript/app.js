@@ -133,6 +133,7 @@ for (i = 0; i < suggestions.length; i++) {
 };
 
 $('#recipe-button').on('click', function() {
+    event.preventDefault();
     var filter = '';
     var checkboxes = document.getElementsByName('check');
     for (var i = 0; i < checkboxes.length; i++) {
@@ -150,16 +151,18 @@ $('#recipe-button').on('click', function() {
             console.log(data);
             var recipe = data.recipes[0];
             $(".title").html(recipe.title);
-          $(".title").prepend("<img src='" + recipe.image + "'>");
-            $(".prep").html("<p>Preparation Time: " + recipe.preparationMinutes + " Minutes</p>");
-            $(".cooking").html("<p>Cooking Time: " + recipe.cookingMinutes + " Minutes</p>");
+            $(".recipe-picture").html("<img src='" + recipe.image + "'>");
+            $(".big-picture").html("<img src='" + recipe.image + "'>")
+            $(".cooking").html("<p>Ready In: " + recipe.readyInMinutes + " Minutes</p>");
             var ingredients = recipe.extendedIngredients;
                 for (i = 0; i < ingredients.length; i++) {
-                    $(".ingredients").append(ingredients[i].originalString);
+                  var ingredientList = $("<li>");
+                  ingredientList.html(ingredients[i].originalString);
+                  $(".ingredients").append(ingredientList);
                 };
                 var instructions = recipe.analyzedInstructions[0].steps;
                 for (j = 0; j < instructions.length; j++) {
-                    $(".instructions").append(instructions[j].step);
+                    $(".instructions").append(" " + instructions[j].step);
                 };
         },
         error: function(data) {
@@ -261,7 +264,7 @@ for (i = 0; i < movieGenres.length; i++) {
     .attr('value', genreName.id)
     .text(genreName.name);
   $('.genre-list').append(newLi);
-}
+};
 
 // function displayMovieInfo() {
 $('.dropdown-item').on('click', function(event) {
