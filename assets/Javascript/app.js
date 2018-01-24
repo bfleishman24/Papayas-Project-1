@@ -9,8 +9,9 @@ $('document').ready(function() {
     projectId: 'papayas-project-1',
     storageBucket: 'papayas-project-1.appspot.com',
     messagingSenderId: '795888444944',
-};
-  // firebase.initializeApp(config);
+  };
+  firebase.initializeApp(config);
+  var database = firebase.database();
   // ---------------------------------------------------------------------------
   // End Initialize Firebase----------------------------------------------------
 
@@ -22,7 +23,7 @@ $('document').ready(function() {
     'dinner',
     'romance',
     'chill',
-    'hip-hop',
+    'hiphop',
     'latin',
     'party',
     'soul',
@@ -84,14 +85,15 @@ $('document').ready(function() {
         };
 
         $.ajax(getPlaylist).done(function(data) {
-          //console.log(data);
-
+          console.log(data);
+          var randomPlaylist = data.playlists.items[Math.floor(Math.random() * 10)];
+          localStorage.setItem("playlist", "spotify/playlists/" + randomPlaylist.id);
           var playlistDiv = $('<iframe>');
           playlistDiv
             .attr(
               'src',
               'https://open.spotify.com/embed?uri=' +
-                data.playlists.items[Math.floor(Math.random() * 10)]
+                randomPlaylist
                   .external_urls.spotify
             )
             .css({
@@ -153,6 +155,7 @@ $('#recipe-button').on('click', function() {
         success: function(data) {
             console.log(data);
             var recipe = data.recipes[0];
+            localStorage.setItem("recipe", recipe.id);
             $(".title").html(recipe.title);
             $(".recipe-picture").html("<img src='" + recipe.image + "'>");
             $(".big-picture").html("<img src='" + recipe.image + "'>")
@@ -301,6 +304,8 @@ $('.dropdown-item').on('click', function(event) {
 
     var movieI = response.results[randomMovie].poster_path;
 
+    localStorage.setItem("movie", response.results[randomMovie].id);
+
     var imgaeURL = 'http://image.tmdb.org/t/p/w185/';
 
     var imgURL = imgaeURL + movieI;
@@ -328,6 +333,28 @@ $('.dropdown-item').on('click', function(event) {
 });
   // ---------------------------------------------------------------------------
   // Movies End-----------------------------------------------------------------
+  $('.thumbs-up').on('click', function(event) {
+    event.preventDefault();
+    var name = $("#firebase-name").val();
+    if (name !== "") {
+      var newEntry = {
+        name: name,
+        playlist: localStorage.getItem("playlist"),
+        recipe: localStorage.getItem("recipe"),
+        movie: localStorage.getItem("movie"),
+        likes: 1
+      };
+    
+      database.ref("/favorites").push(newEntry);
+      $(".hide-me").html("<h2 class='recipe'>Great!!!</h2>");
+    
+    };
+  });
+
+  $('.thumbs-down').on('click', function(event) {
+    event.preventDefault();
+    $("#5").hide();
+  });
 });
   // ---------------------------------------------------------------------------
   // Document Ready End---------------------------------------------------------
