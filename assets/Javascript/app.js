@@ -14,7 +14,8 @@ $('document').ready(function() {
   // ---------------------------------------------------------------------------
   // End Initialize Firebase----------------------------------------------------
 
-
+  $("#4").hide();
+  $("#5").hide();
   // ---------------------------------------------------------------------------
   // Spotify Start--------------------------------------------------------------
   var playlistCategories = [
@@ -166,6 +167,8 @@ $('#recipe-button').on('click', function() {
                 for (j = 0; j < instructions.length; j++) {
                     $(".instructions").append(" " + instructions[j].step);
                 };
+                $("#4").show();
+                $("#5").show();
         },
         error: function(data) {
             console.log(data);
