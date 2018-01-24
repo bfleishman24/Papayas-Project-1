@@ -23,6 +23,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
 </head>
 
 <body>
@@ -346,36 +348,24 @@
                 <!-- BEGIN TABLE -->
                 <div class="row">
                   <div class="col-md-12">
-                    <table class="container">
+                    <table id="picksTable" class="container">
                       <thead>
                         <tr>
                           <th>
-                            <h1>Sites</h1>
+                            <h1>Pick Name</h1>
                           </th>
                           <th>
-                            <h1>Views</h1>
-                          </th>
-                          <th>
-                            <h1>Clicks</h1>
+                            <h1>Likes</h1>
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Google</td>
-                          <td>9518</td>
+                        <!-- This is where we are dynamically inserting our previously stored picks -->
+                        <!-- <tr>
+                          <td id="name">Google</td>åå
+                          <td id="id">9518</td>
                           <td>6369</td>
-                        </tr>
-                        <tr>
-                          <td>Twitter</td>
-                          <td>7326</td>
-                          <td>10437</td>
-                        </tr>
-                        <tr>
-                          <td>Amazon</td>
-                          <td>4162</td>
-                          <td>5327</td>
-                        </tr>
+                        </tr> -->
                       </tbody>
                     </table>
                   </div>
