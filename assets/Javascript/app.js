@@ -330,49 +330,7 @@ $('.dropdown-item').on('click', function(event) {
   // Movies End-----------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   // Our Picks Table------------------------------------------------------------
   var userDataRef = firebase.database().ref("favorites").orderByKey();
   userDataRef.once("value").then(function(snapshot) {
