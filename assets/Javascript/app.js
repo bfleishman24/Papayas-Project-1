@@ -330,12 +330,55 @@ $('.dropdown-item').on('click', function(event) {
   // Movies End-----------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   // Our Picks Table------------------------------------------------------------
   var userDataRef = firebase.database().ref("favorites").orderByKey();
   userDataRef.once("value").then(function(snapshot) {
   snapshot.forEach(function(childSnapshot) {
     var key = childSnapshot.key;
-    var childData = childSnapshot.val();              
+    var childData = childSnapshot.val();               
       // console.log(key)
       // console.log(childData)
     
