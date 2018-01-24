@@ -295,15 +295,12 @@
                 <div class="heading">
                   <h4>Rate Your Experience</h4>
                 </div>
-                <div class="row">
+                <div class="row hide-me">
                   <div class="col-md-8">
-                    <div class="contat-form">
+                    <div class="contact-form">
                       <form id="contact" action="" method="post">
                         <fieldset>
-                          <input name="name" type="text" class="form-control" id="firebase name" placeholder="Create A Name For Your Experience!" required="">
-                        </fieldset>
-                        <fieldset>
-                          <button type="submit" id="form-submit" class="btn">Submit</button>
+                          <input name="name" type="text" class="form-control" id="firebase-name" placeholder="Create A Name For Your Experience!" required="">
                         </fieldset>
                       </form>
                     </div>
@@ -311,12 +308,12 @@
                   <div class="col-md-4">
                     <div class="more-info removebackground" style="background-color:	#d3d3d3; padding: 2px;">
                       <div class="nav__item rating">
-                        <a href="INSERT VALUE FOR THUMBS UP" class="nav__link c-blue">
+                        <a href="INSERT VALUE FOR THUMBS UP" class="nav__link c-blue thumbs-up">
                           <img class="rating" src="img/thumbs_up_right.png" alt="">
                         </a>
                       </div>
                       <div class="nav__item rating">
-                        <a href="INSERT VALUE FOR THUMBS UP" class="nav__link c-blue">
+                        <a href="INSERT VALUE FOR THUMBS UP" class="nav__link c-blue thumbs-down">
                           <img class="rating" src="img/thumbs_down.png" alt="">
                         </a>
                       </div>
@@ -398,6 +395,7 @@
     </article>
   </section>
 
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="../assets/Javascript/app.js"></script>
   <script>
