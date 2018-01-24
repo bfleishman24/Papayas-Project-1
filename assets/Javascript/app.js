@@ -10,7 +10,7 @@ $('document').ready(function() {
     storageBucket: 'papayas-project-1.appspot.com',
     messagingSenderId: '795888444944',
 };
-  // firebase.initializeApp(config);
+  firebase.initializeApp(config);
   // ---------------------------------------------------------------------------
   // End Initialize Firebase----------------------------------------------------
 
@@ -328,6 +328,28 @@ $('.dropdown-item').on('click', function(event) {
 });
   // ---------------------------------------------------------------------------
   // Movies End-----------------------------------------------------------------
+
+  // ---------------------------------------------------------------------------
+  // Our Picks Table------------------------------------------------------------
+  var userDataRef = firebase.database().ref("favorites").orderByKey();
+  userDataRef.once("value").then(function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
+    var key = childSnapshot.key;
+    var childData = childSnapshot.val();              
+      // console.log(key)
+      // console.log(childData)
+    
+    var likes_val = childSnapshot.val().likes;
+    // console.log(likes_val)
+    
+    var name_val = childSnapshot.val().name;
+    // console.log(name_val)
+
+    $("#picksTable > tbody").append("<tr><td>" + name_val + "</td><td>" + likes_val + "</td><td>");
+
+    });
+  });
 });
   // ---------------------------------------------------------------------------
   // Document Ready End---------------------------------------------------------
+
