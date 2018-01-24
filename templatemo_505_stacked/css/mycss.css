@@ -138,19 +138,23 @@ h2 a {
 
 /* Background-color of the odd rows */
 .container tr:nth-child(odd) {
-	  background-color: #323C50;
+	background-color: #323C50;
 }
 
 /* Background-color of the even rows */
 .container tr:nth-child(even) {
-	  background-color: #2C3446;
+	background-color: #2C3446;
 }
 
 .container th {
-	  background-color: #1F2739;
+	background-color: #1F2739;
 }
 
-.container td:first-child { color: #FB667A; }
+.container td { color: #FB667A; }
+
+#picksTable {
+    width: 500px;
+}
 
 .container tr:hover {
    background-color: #464A52;
@@ -196,6 +200,15 @@ h2 a {
 
 .genre-list, .playlist-list:hover {
     cursor: pointer;
+}
+
+.favorites-button {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.thank-you {
+    color: #FB667A;
 }
 /* @media (max-width: 800px) {
 .container td:nth-child(4),

@@ -17,6 +17,8 @@ $('document').ready(function() {
 
   $("#4").hide();
   $("#5").hide();
+  $(".recipe-icon").hide();
+  localStorage.clear();
   // ---------------------------------------------------------------------------
   // Spotify Start--------------------------------------------------------------
   var playlistCategories = [
@@ -127,7 +129,6 @@ $('document').ready(function() {
     'italian',
     'mexican',
     'spanish',
-    'middle\ eastern',
     'american',
     'southern',
     'german',
@@ -172,6 +173,7 @@ $('#recipe-button').on('click', function() {
                 };
                 $("#4").show();
                 $("#5").show();
+                $(".recipe-icon").show();
         },
         error: function(data) {
             console.log(data);
@@ -305,15 +307,16 @@ $('.dropdown-item').on('click', function(event) {
     var movieI = response.results[randomMovie].poster_path;
 
     localStorage.setItem("movie", response.results[randomMovie].id);
+    localStorage.setItem("favorite", false);
 
     var imgaeURL = 'http://image.tmdb.org/t/p/w185/';
 
     var imgURL = imgaeURL + movieI;
 
-    console.log(imgURL);
+    //console.log(imgURL);
 
     var moviePlot = response.results[randomMovie].overview;
-    console.log(moviePlot);
+    //console.log(moviePlot);
 
     // Creating a div to hold the movie title
     var title = $('<h1>').text(movieTitle);
@@ -351,14 +354,140 @@ $('.dropdown-item').on('click', function(event) {
     var name_val = childSnapshot.val().name;
     // console.log(name_val)
 
-    $("#picksTable > tbody").append("<tr><td>" + name_val + "</td><td>" + likes_val + "</td><td>");
+    $("#picksTable > tbody").append('<tr class="firebase-pick" id = "' + key + '"><td>' + name_val + '</td><td>' + likes_val + '</td><td>');
 
     });
   });  
+
+  // Populating a pick
+  $('#picksTable').on('click', '.firebase-pick', function(event) {
+    event.preventDefault();
+    var chosenKey = this.id;
+    var favoritesKey = database.ref("/favorites/" + chosenKey);
+    favoritesKey.once("value").then(function(snapshot) {
+      var favoritePlaylist = snapshot.val().playlist;
+      var favoriteRecipe = snapshot.val().recipe;
+      var favoriteMovie = snapshot.val().movie;
+      var favoriteName = snapshot.val().name;
+      var favoriteLikes = snapshot.val().likes;
+      $(".favorite-name").html("<h2 class='thank-you'>" + favoriteName + "</h2>");
+      localStorage.setItem("favorite", true);
+      localStorage.setItem("likes", favoriteLikes);
+      localStorage.setItem("key", chosenKey);
+      $("#4").show();
+      $("#5").show();
+      $(".recipe-icon").show();
+      var authSettings = {
+        async: true,
+        crossDomain: true,
+        url: 'https://cors-anywhere.herokuapp.com/https://accounts.spotify.com/api/token',
+        method: 'POST',
+        headers: {
+          Authorization: 'Basic NjIyYTUwNDZkN2ZkNDM2Njk4MGNhZDgyNDJiNTYzY2U6ZjA2YWNhNzUxNGI5NDI1ZDk3MTc3MGIzMDMwNGZkMzE=',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          grant_type: 'client_credentials'
+        }
+      };
+      $.ajax(authSettings).done(function(response) {
+        var accessToken = response.access_token;
+        var getPlaylist = {
+          async: true,
+          crossDomain: true,
+          url: 'https://api.spotify.com/v1/users/' + favoritePlaylist,
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + accessToken + "'"
+          }
+        };
+        $.ajax(getPlaylist).done(function(data) {
+          console.log(data);
+          
+          var playlistDiv = $('<iframe>');
+          playlistDiv
+            .attr(
+              'src',
+              'https://open.spotify.com/embed?uri=' +
+                data
+                  .external_urls.spotify
+            )
+            .css({
+              width: '300',
+              height: '380',
+              frameborder: '0',
+              allowtransparency: 'true',
+            });
+          $('.playlist').html('');
+          $('.playlist').append(playlistDiv);
+        });
+      });
+      $.ajax({
+        method: 'GET',
+        url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + favoriteRecipe + "/information?includeNutrition=false",
+        headers: { "X-Mashape-Key": 'n884na5hymmshNJQPRr9e1VpysDQp1p3GaVjsnkHuZgYB165gY', "Accept": 'application/json' },
+        success: function(data) {
+            console.log(data);
+            var recipe = data;
+            $(".title").html(recipe.title);
+            $(".recipe-picture").html("<img src='" + recipe.image + "'>");
+            $(".big-picture").html("<img src='" + recipe.image + "'>")
+            $(".cooking").html("<p>Ready In: " + recipe.readyInMinutes + " Minutes</p>");
+            var ingredients = recipe.extendedIngredients;
+                for (i = 0; i < ingredients.length; i++) {
+                  var ingredientList = $("<li>");
+                  ingredientList.html(ingredients[i].originalString);
+                  $(".ingredients").append(ingredientList);
+                };
+                var instructions = recipe.analyzedInstructions[0].steps;
+                for (j = 0; j < instructions.length; j++) {
+                    $(".instructions").append(" " + instructions[j].step);
+                };
+          },
+          error: function(data) {
+              console.log(data);
+          }
+      });
+      $('#title').html('');
+      $('.movieP').html('');
+      $('#plot').html('');
+      $.ajax({
+        url: 'https://api.themoviedb.org/3/movie/' + favoriteMovie + '?api_key=13fb7053b108732df8330eeb99f8a1f2',
+        method: 'GET',
+      }).done(function(response) {
+        console.log(response);
+        var movieTitle = response.original_title;
+        var movieI = response.poster_path;
+        var imgaeURL = 'http://image.tmdb.org/t/p/w185/';
+        var imgURL = imgaeURL + movieI;
+        var moviePlot = response.overview;
+        var title = $('<h1>').text(movieTitle);
+        var image = $('<img>').attr('src', imgURL);
+        image.addClass('picture-size');
+        var plot = $('<p>').text(moviePlot);
+        $('#title').prepend(title);
+        $('.movieP').prepend(image);
+        $('#plot').prepend(plot);
+        });
+      });
+      $('html, body').animate({ scrollTop: $('#2').offset().top }, 'slow');
+    });
+
+  // Voting Section
   $('.thumbs-up').on('click', function(event) {
     event.preventDefault();
     var name = $("#firebase-name").val();
-    if (name !== "") {
+    var favorite = localStorage.getItem("favorite");
+    if (favorite === "true") {
+      var likes = localStorage.getItem("likes");
+      likes++;
+      var chosenKey = localStorage.getItem("key");
+      var favoritesKey = database.ref("/favorites/" + chosenKey);
+      favoritesKey.child("likes").set(likes);
+      $(".hide-me").html("<h2 class='thank-you'>Thanks For Your Feedback!!</h2>");
+    }
+    else if (favorite === "false" && name !== "") {
       var newEntry = {
         name: name,
         playlist: localStorage.getItem("playlist"),
@@ -366,11 +495,11 @@ $('.dropdown-item').on('click', function(event) {
         movie: localStorage.getItem("movie"),
         likes: 1
       };
-    
       database.ref("/favorites").push(newEntry);
-      $(".hide-me").html("<h2 class='recipe'>Great!!!</h2>");
+      $(".hide-me").html("<h2 class='thank-you'>Thanks For Your Feedback!!</h2>");
     
-    };
+    }
+    else {};
   });
 
   $('.thumbs-down').on('click', function(event) {
