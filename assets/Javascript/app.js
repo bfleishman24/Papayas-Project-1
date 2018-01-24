@@ -399,6 +399,28 @@ $('.dropdown-item').on('click', function(event) {
 });
   // ---------------------------------------------------------------------------
   // Movies End-----------------------------------------------------------------
+
+  // ---------------------------------------------------------------------------
+
+  // Our Picks Table------------------------------------------------------------
+  var userDataRef = firebase.database().ref("favorites").orderByKey();
+  userDataRef.once("value").then(function(snapshot) {
+  snapshot.forEach(function(childSnapshot) {
+    var key = childSnapshot.key;
+    var childData = childSnapshot.val();               
+      // console.log(key)
+      // console.log(childData)
+    
+    var likes_val = childSnapshot.val().likes;
+    // console.log(likes_val)
+    
+    var name_val = childSnapshot.val().name;
+    // console.log(name_val)
+
+    $("#picksTable > tbody").append("<tr><td>" + name_val + "</td><td>" + likes_val + "</td><td>");
+
+    });
+  });  
   $('.thumbs-up').on('click', function(event) {
     event.preventDefault();
     var name = $("#firebase-name").val();
@@ -424,4 +446,8 @@ $('.dropdown-item').on('click', function(event) {
 });
   // ---------------------------------------------------------------------------
   // Document Ready End---------------------------------------------------------
+<<<<<<< HEAD
 >>>>>>> 1840b745aad0113f803402dd256bae45120b0495
+=======
+
+>>>>>>> c91758f6f7be5146fe4f36614cc01f33d85eb0c2
