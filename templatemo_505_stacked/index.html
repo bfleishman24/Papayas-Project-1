@@ -1,10 +1,6 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
+
 <html class="no-js" lang="">
-<!--<![endif]-->
 
 <head>
   <meta charset="utf-8">
@@ -23,6 +19,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+
 </head>
 
 <body>
@@ -45,42 +43,17 @@
         </a>
       </li>
       <li class="nav__item">
-        <a href="#4" class="nav__link c-red">
+        <a href="#4" class="nav__link c-red recipe-icon">
           <img class="nav-sizer" src="img/plate-fork-and-knife.png" alt="">
         </a>
       </li>
       <li class="nav__item">
-        <a href="#5" class="nav__link c-green">
+        <a href="#6" class="nav__link c-green">
           <img src="img/about-icon.png" alt="">
         </a>
       </li>
     </ul>
   </nav>
-
-  <!-- HISTORY/FAVORITE/NEWSFEED NAV
-        <nav class="nav">
-            <div class="burger">
-              <div class="burger__patty"></div>
-            </div>
-  
-            <ul class="nav__list">
-              <li class="nav__item">
-                <a href="#1" class="nav__link c-blue"><img class="nav-sizer" src="img/windows.png" alt=""></a>
-              </li>
-              <li class="nav__item">
-                <a href="#2" class="nav__link c-yellow scrolly"><img class="nav-sizer" src="img/settings-gears.png" alt=""></a>
-              </li>
-              <li class="nav__item">
-                  <a href="#3" class="nav__link c-red"><img class="nav-sizer" src="img/more.png" alt=""></a>
-                </li>
-              <li class="nav__item">
-                <a href="#4" class="nav__link c-red"><img class="nav-sizer" src="img/plate-fork-and-knife.png" alt=""></a>
-              </li>
-              <li class="nav__item">
-                <a href="#5" class="nav__link c-green"><img src="img/about-icon.png" alt=""></a>
-              </li>
-            </ul>
-          </nav> -->
 
   <section class="panel b-blue" id="1" style="margin-bottom: 0px;">
     <article class="panel__wrapper">
@@ -129,6 +102,9 @@
               <div class="projects-content">
                 <div class="heading">
                   <h4>Select your feels</h4>
+                  <div class="primary-button favorites-button">
+                      <a href="#6" style="color: whitesmoke;">Check Out Our Favorites</a>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
@@ -153,9 +129,6 @@
                                 <div class="dropdown-menu dropdown-menu-right over-ride-li playlist-list">
 
                                 </div>
-                                <button id="music-button" type="button" class="btn btn-secondary btn-search">
-                                  <i class="glyphicon glyphicon-share"></i>
-                                </button>
                               </div>
                             </div>
                           </div>
@@ -218,11 +191,7 @@
                                   <span class="caret">&nbsp;</span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right over-ride-li genre-list">
-
                                 </div>
-                                <button id="movie-button" type="button" class="btn btn-secondary btn-search">
-                                  <i class="glyphicon glyphicon-share"></i>
-                                </button>
                               </div>
                             </div>
                           </div>
@@ -261,9 +230,6 @@
                           <h5 class="recipe">Directions:</h5>
                           <div class="txt-formating instructions"></div>
                         </fieldset>
-                        <!-- <fieldset>
-                                <button type="submit" id="form-submit" class="btn">Send Message</button>
-                              </fieldset> -->
                       </form>
                       </div>
                       </div>
@@ -298,7 +264,7 @@
                 <div class="row hide-me">
                   <div class="col-md-8">
                     <div class="contact-form">
-                      <form id="contact" action="" method="post">
+                      <form class="favorite-name" id="contact" action="" method="post">
                         <fieldset>
                           <input name="name" type="text" class="form-control" id="firebase-name" placeholder="Create A Name For Your Experience!" required="">
                         </fieldset>
@@ -345,45 +311,21 @@
                 </div>
                 <!-- BEGIN TABLE -->
                 <div class="row">
-                  <div class="col-md-12">
-                    <table class="container">
+                  <div class="col-md-6">
+                    <table id="picksTable" class="container">
                       <thead>
                         <tr>
                           <th>
-                            <h1>Sites</h1>
+                            <h1>Pick Name</h1>
                           </th>
                           <th>
-                            <h1>Views</h1>
-                          </th>
-                          <th>
-                            <h1>Clicks</h1>
+                            <h1>Likes</h1>
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Google</td>
-                          <td>9518</td>
-                          <td>6369</td>
-                        </tr>
-                        <tr>
-                          <td>Twitter</td>
-                          <td>7326</td>
-                          <td>10437</td>
-                        </tr>
-                        <tr>
-                          <td>Amazon</td>
-                          <td>4162</td>
-                          <td>5327</td>
-                        </tr>
                       </tbody>
                     </table>
-                  </div>
-                </div>
-                <div class="footer">
-                  <div class="primary-button">
-                    <a href="#4" style="
-                                    color: whitesmoke;">Music's rockin, Lets get cookin</a>
                   </div>
                 </div>
               </div>
